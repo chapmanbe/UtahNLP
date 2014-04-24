@@ -1,9 +1,18 @@
-package ConTextItems
-
 import scala.io.Source
 import scala.collection.mutable.ArrayBuffer
 import scala.util.matching.Regex
+object Span{
 
+  def getSpan( matchedTerm: scala.util.matching.Regex.Match, matchingItem: ContextItem) = {
+    if( matchingItem.rule == "forward") {
+      (matchedTerm.end,matchedTerm.source.length) 
+    } else if( matchingItem.rule == "backward"){
+      (0,matchedTerm.start)
+    } else {
+      (0,matchedTerm.source.length)
+    }
+  }
+}
 class ContextItem(args: Array[String]){
   val literal = args(0)
   val category = ((args(1)).toLowerCase()).split(",")
@@ -20,14 +29,20 @@ class ItemData(val header: List[String], val items: List[ContextItem]){
   override def toString = items.length + " ContextItem objects"
 }
 
-class tagObject(val matchedTerm: scala.util.matching.Regex.Match, val matchingItem: ContextItem){
+class tagObject(val matchedTerm: scala.util.matching.Regex.Match, 
+                val matchingItem: ContextItem,
+                val scope: (Int, Int)){
   val tagID = ""
-  val start = matchedTerm.start
-  val end = matchedTerm.end
-  val foundPhrase = matchedTerm.matchedTerm
-  val category = matchingItem.category
+  def start = matchedTerm.start
+  def end = matchedTerm.end
+  def foundPhrase = matchedTerm.matched 
+  def category = matchingItem.category 
 
-  override def toString = s"<id> $tagid </id><phrase> $foundPhrase </phrase><category> $category </category>"
+  def this(matchedTerm: scala.util.matching.Regex.Match,
+           matchingItem: ContextItem) = {
+           this(matchedTerm,matchingItem,Span.getSpan(matchedTerm,matchingItem))
+  }
+  override def toString = s"<id> $tagID </id><phrase> $foundPhrase </phrase><category> $category </category>"
 }
 
 
