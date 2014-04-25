@@ -1,3 +1,5 @@
+
+def getSpan(
 class ConTextItem(object):
     def __init__(self, literal, category, regex, rule):
         if not regex:
