@@ -1,7 +1,13 @@
 ////////////////
 //
-// Author: Bob Angell for Dr. Wendy Chapman
-// Date: 15 May, 2014
+// Author: Bob Angell for 
+// Dr. Wendy Chapman, 
+// Department Chair, 
+// Biomedical Informatics, 
+// University of Utah School of Medicine, 
+// University of Utah
+//         
+// Date: May, 2014
 // 
 // How to use:
 //
