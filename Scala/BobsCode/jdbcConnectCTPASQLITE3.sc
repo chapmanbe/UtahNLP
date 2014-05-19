@@ -10,19 +10,8 @@
 // Step 1: Install sqlite3 and .jar files.
 // Step 2: Using sqlite3 at the command-line, create your database - because this is a FILE, naming is important, even with the extension. 
 //	You may name your file ANYTHING, just as long as you use this name EXACTLY as it is for the JDBC sqlite statement.
-// Step 3: Create a table/insert data into tbl1
-//
-// sqlite> create table tbl1(one varchar(10), two smallint);
-// sqlite> insert into tbl1 values('hello!',10);
-// sqlite> insert into tbl1 values('goodbye', 20);
-// sqlite> select * from tbl1;
-//  hello!|10
-//  goodbye|20
-//
-// Step 5: run code
-// Step 6: Results: 1, Results: 1, test record, 25, 123 Elm Street                                    , 25500.4609
-// Results: hello!, 10
-// Results: goodbye, 20
+// Step 3: Use table reports from the cpta.db
+// Step 4: run code
 //
 ////////////////
 
