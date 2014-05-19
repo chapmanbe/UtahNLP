@@ -2,7 +2,8 @@ package ConText
 import scalax.collection.Graph
 import scalax.collection.GraphPredef._, scalax.collection.GraphEdge._
 
-object graphDebug {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; def main(args: Array[String])=$execute{;$skip(181); 
+object graphDebug {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; def main(args: Array[String])=$execute{;$skip(184); 
+  
   println("Welcome to the Scala worksheet");$skip(46); 
   var g1 = Graph[Int,DiEdge](1,2,3,1~>2,1~>3);System.out.println("""g1  : scalax.collection.Graph[Int,scalax.collection.GraphEdge.DiEdge] = """ + $show(g1 ));$skip(23); 
   var g2 = Graph(3~>2);System.out.println("""g2  : scalax.collection.Graph[Int,scalax.collection.GraphEdge.DiEdge] = """ + $show(g2 ));$skip(22); 
@@ -21,5 +22,8 @@ object graphDebug {;import org.scalaide.worksheet.runtime.library.WorksheetSuppo
   g5 mkString "::";System.out.println("""res2: String = """ + $show(res$2));$skip(25); val res$3 = 
   g5.nodes mkString "::";System.out.println("""res3: String = """ + $show(res$3));$skip(12); val res$4 = 
   g5 find 2;System.out.println("""res4: Option[ConText.graphDebug.g5.NodeT] = """ + $show(res$4));$skip(12); val res$5 = 
-  g5 find 7;System.out.println("""res5: Option[ConText.graphDebug.g5.NodeT] = """ + $show(res$5))}
+  g5 find 7;System.out.println("""res5: Option[ConText.graphDebug.g5.NodeT] = """ + $show(res$5));$skip(30); 
+  val itemGraph = Graph(1~>2);System.out.println("""itemGraph  : scalax.collection.Graph[Int,scalax.collection.GraphEdge.DiEdge] = """ + $show(itemGraph ));$skip(16); val res$6 = 
+  itemGraph + 0;System.out.println("""res6: scalax.collection.Graph[Int,scalax.collection.GraphEdge.DiEdge] = """ + $show(res$6))}
+  
 }
