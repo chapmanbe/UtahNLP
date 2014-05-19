@@ -1,9 +1,13 @@
+package ConText
 import scala.io.Source
 import scala.collection.mutable.ArrayBuffer
 import scala.util.matching.Regex
 import scala.math
+import scalax.collection.Graph
+import scalax.collection.GraphPredef._, scalax.collection.GraphEdge._
 
-object Span{
+
+object Span{;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; def main(args: Array[String])=$execute{;$skip(578); 
 
   def getSpan( matchedTerm: scala.util.matching.Regex.Match, matchingItem: ConText.ContextItem) = {
     if( matchingItem.rule == "forward") {
@@ -13,8 +17,7 @@ object Span{
     } else {
       (0,matchedTerm.source.length)
     }
-  }                                               //> getSpan: (matchedTerm: util.matching.Regex.Match, matchingItem: ConText.ConT
-                                                  //| ext.ContextItem)(Int, Int)
+  };System.out.println("""getSpan: (matchedTerm: util.matching.Regex.Match, matchingItem: ConText.ConText.ContextItem)(Int, Int)""");$skip(799); 
 
   def limitScope( target: ConText.ConTextTag, modifier: ConText.ConTextTag): ConText.ConTextTag ={
     val tRule = target.rule
@@ -31,21 +34,15 @@ object Span{
         newStart = math.max(target.start, modifier.end)
       new ConText.ConTextTag(target.matchedTerm,target.matchingItem,(newStart,newEnd))
     }
-  }                                               //> limitScope: (target: ConText.ConText.ConTextTag, modifier: ConText.ConText.
-                                                  //| ConTextTag)ConText.ConText.ConTextTag
+  };System.out.println("""limitScope: (target: ConText.ConText.ConTextTag, modifier: ConText.ConText.ConTextTag)ConText.ConText.ConTextTag""");$skip(148); 
 
   def dist(tag1: ConText.ConTextTag,tag2: ConText.ConTextTag): Double =
-    math.min( math.abs(tag1.start-tag2.end),math.abs(tag1.end-tag2.start))
-                                                  //> dist: (tag1: ConText.ConText.ConTextTag, tag2: ConText.ConText.ConTextTag)D
-                                                  //| ouble
+    math.min( math.abs(tag1.start-tag2.end),math.abs(tag1.end-tag2.start));System.out.println("""dist: (tag1: ConText.ConText.ConTextTag, tag2: ConText.ConText.ConTextTag)Double""");$skip(133); 
   def encompasses(tag1: ConText.ConTextTag,tag2: ConText.ConTextTag): Boolean =
-    tag1.start <= tag2.start && tag1.end >= tag2.end
-                                                  //> encompasses: (tag1: ConText.ConText.ConTextTag, tag2: ConText.ConText.ConTe
-                                                  //| xtTag)Boolean
+    tag1.start <= tag2.start && tag1.end >= tag2.end;System.out.println("""encompasses: (tag1: ConText.ConText.ConTextTag, tag2: ConText.ConText.ConTextTag)Boolean""");$skip(97); 
 
   def replaceCategory(tag1: ConText.ConTextTag,category: String): ConText.ConTextTag =
-    tag1                                          //> replaceCategory: (tag1: ConText.ConText.ConTextTag, category: String)ConTex
-                                                  //| t.ConText.ConTextTag
+    tag1;System.out.println("""replaceCategory: (tag1: ConText.ConText.ConTextTag, category: String)ConText.ConText.ConTextTag""")}
   
 }
 
@@ -57,16 +54,24 @@ object IO{
     val iter = source.getLines
     val header = (iter.next).split("\t")
     for (line <- iter ){
-      //rows += line.split("\t").map(_.trim)
-      //println(line)
-      //new ContextItem(line.split("\t")) +: rows
       rows += new ConText.ContextItem(line.split("\t").map(_.trim))
     }
     //println("length of rows is "+rows.length)
     (header.toList, rows.toList)
   }
 }
+object Text{
+	val cleanTextRegEx1 = """\W""".r
+	val cleanTextRegEx2 = """\s+""".r
+	val cleanTextRegEx3 = """\d""".r
+	
+	//def cleanText(str1: String, stripNonAlphaNumeric: Boolean, stripNumbers: Boolean) = {
+	def cleanText(str1: String) = {
+		cleanTextRegEx3 replaceAllIn(str1," ")
+	}
 
+
+}
 object ConText {
   println("Welcome to the Scala worksheet")
   class ContextItem(args: Array[String]){
@@ -93,12 +98,18 @@ object ConText {
 	  def foundPhrase = matchedTerm.matched
 	  def category = matchingItem.category
 	  def rule = matchingItem.rule
-/*
-	  def this(matchedTerm: scala.util.matching.Regex.Match, matchingItem: ContextItem): =
-	    this(matchedTerm,matchingItem,Span.getSpan(matchedTerm,matchingItem))
-*/
+
+	  /*def this(matchedTerm: scala.util.matching.Regex.Match, matchingItem: ContextItem) =
+	    this(matchedTerm,matchingItem,Span.getSpan(matchedTerm,matchingItem))*/
+
 	  override def toString = s"<id> $tagID </id><phrase> $foundPhrase </phrase><category> $category </category>"
 	}
+	class ConTextMarkup( val text: String){
+		def markItems( items: ItemData ) = {
+			// make a list of ConTextTag items for each item in items matching in text
+		}
+	}
+	
 }
 
 object TestConTextItem{
@@ -113,4 +124,10 @@ object TestConTextItem{
       println(item.re.pattern+"-->"+item.literal+"-->"+item.re.findFirstIn(item.literal))
     }
   }
+  var b = "Pulmonary Embolism\tPE\tPE\tNone"
+  b
+  var c = b.split("\t").map(_.trim)
+  var d = new ConText.ContextItem(b.split("\t").map(_.trim))
+  var g1 = Graph[Int,DiEdge](1,2,3,1~>2,1~>3)
+  println(g1)
 }
