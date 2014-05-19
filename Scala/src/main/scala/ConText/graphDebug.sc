@@ -3,6 +3,7 @@ import scalax.collection.Graph
 import scalax.collection.GraphPredef._, scalax.collection.GraphEdge._
 
 object graphDebug {
+  
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
   var g1 = Graph[Int,DiEdge](1,2,3,1~>2,1~>3)     //> g1  : scalax.collection.Graph[Int,scalax.collection.GraphEdge.DiEdge] = Grap
                                                   //| h(1, 2, 3, 1~>2, 1~>3)
@@ -30,4 +31,9 @@ object graphDebug {
   g5.nodes mkString "::"                          //> res3: String = 1::5::2::6::3::4
   g5 find 2                                       //> res4: Option[ConText.graphDebug.g5.NodeT] = Some(2)
   g5 find 7                                       //> res5: Option[ConText.graphDebug.g5.NodeT] = None
+  val itemGraph = Graph(1~>2)                     //> itemGraph  : scalax.collection.Graph[Int,scalax.collection.GraphEdge.DiEdge]
+                                                  //|  = Graph(1, 2, 1~>2)
+  itemGraph + 0                                   //> res6: scalax.collection.Graph[Int,scalax.collection.GraphEdge.DiEdge] = Grap
+                                                  //| h(0, 1, 2, 1~>2)
+  
 }
